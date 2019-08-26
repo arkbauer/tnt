@@ -52,7 +52,7 @@ abstract class AbstractService {
     
     /**
      * Password
-     * 
+     *
      * @var string
      */
     protected $password;
@@ -63,6 +63,8 @@ abstract class AbstractService {
      * @var bool
      */
     private $verifySSL = true;
+
+    protected $content;
     
     /**
      * Get TNT service URL
@@ -227,9 +229,11 @@ abstract class AbstractService {
      */
     protected function getXmlContent()
     {
-        
-        return $this->xml->flush(false);
-        
+        if(!$this->content) {
+            $this->content = $this->xml->flush(true);
+        }
+
+        return $this->content;
     }
     
     /**
